@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>True Love Calculator</title>
+</head>
+
+<body style="font-family: Arial; text-align: center;">
+
+  <h2>❤️ True Love Calculator ❤️</h2>
+  <p>Answer each question from 1 (Disagree) to 5 (Agree)</p>
+
+  <p>1. I like going outside</p>
+  <input id="q1"><br>
+
+  <p>2. I enjoy new foods</p>
+  <input id="q2"><br>
+
+  <p>3. I watch movies often</p>
+  <input id="q3"><br>
+
+  <p>4. I like traveling</p>
+  <input id="q4"><br>
+
+  <p>5. I wake up early</p>
+  <input id="q5"><br><br>
+
+  <button onclick="calculate()">Check</button>
+
+  <p id="result"></p>
+
+<script>
+  // ideal answers
+  const ideal = [5, 4, 3, 5, 2];
+
+  // validate function
+  function validate(x) {
+    return x >= 1 && x <= 5;
+  }
+
+  function calculate() {
+    let answers = [
+      Number(q1.value),
+      Number(q2.value),
+      Number(q3.value),
+      Number(q4.value),
+      Number(q5.value)
+    ];
+
+    let total = 0;
+
+    for (let i = 0; i < 5; i++) {
+      if (!validate(answers[i])) {
+        result.innerHTML = "Enter numbers 1-5 for all questions";
+        return;
+      }
+
+      total += Math.abs(answers[i] - ideal[i]);
+    }
+
+    let score = 100 - (total * 5);
+
+    let message = "";
+    if (score >= 85) {
+      message = "❤️ True Love!";
+    } else if (score >= 60) {
+      message = "😊 Good Friends";
+    } else {
+      message = "🏃 Run Away!";
+    }
+
+    result.innerHTML = "Score: " + score + "%<br>" + message;
+  }
+</script>
+
+</body>
+</html>
